@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OBS-免费开源的直播推流与屏幕录制软件</title>
+    <meta name="description" content="OBS Studio 是免费开源的直播推流软件与屏幕录制工具。本文详细介绍 OBS 的下载安装、核心功能配置（如场景切换、来源添加）、直播推流设置以及录制技巧，帮助您轻松完成高质量的视频内容创作。">
+    <meta name="keywords" content="OBS, OBS下载, OBS教程, 屏幕录制, 直播推流, OBS设置">
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <style>
+        :root {
+            --primary-color: #2b2b2b;
+            --accent-color: #00d4ff;
+            --accent-hover: #00a3cc;
+            --bg-light: #f5f5f7;
+            --bg-white: #ffffff;
+            --text-main: #333333;
+            --text-secondary: #666666;
+            --border-color: #e0e0e0;
+            --spacing-unit: 16px;
+            --container-width: 1200px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            background-color: var(--bg-light);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.2s ease;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Layout */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit);
+        }
+
+        /* Header */
+        header {
+            background-color: var(--bg-white);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .nav-links a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .btn-download {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background-color 0.2s;
+        }
+
+        .btn-download:hover {
+            background-color: var(--accent-hover);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #cccccc;
+            max-width: 700px;
+            margin: 0 auto 32px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .btn-hero {
+            background-color: white;
+            color: var(--primary-color);
+            padding: 12px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: transform 0.2s;
+        }
+
+        .btn-hero:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .btn-hero.secondary {
+            background-color: transparent;
+            border: 2px solid rgba(255,255,255,0.3);
+            color: white;
+        }
+
+        .btn-hero.secondary:hover {
+            border-color: white;
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        /* Features Section */
+        .section {
+            padding: 64px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 12px;
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+        }
+
+        .feature-card {
+            background: var(--bg-white);
+            padding: 32px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 16px;
+            color: var(--accent-color);
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Installation Guide */
+        .install-container {
+            background-color: var(--bg-white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+        }
+
+        .install-steps {
+            padding: 48px;
+        }
+
+        .step {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .step:last-child {
+            margin-bottom: 0;
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .step-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+
+        .step-content p {
+            color: var(--text-secondary);
+        }
+
+        .code-block {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 16px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            margin-top: 12px;
+            overflow-x: auto;
+        }
+
+        /* Use Cases */
+        .use-cases {
+            background-color: #f8f9fa;
+        }
+
+        .cases-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .case-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .case-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .check-icon {
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* FAQ */
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 24px;
+        }
+
+        .faq-item {
+            background: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        .faq-item h4 {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            color: var(--primary-color);
+        }
+
+        .faq-item p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: #cccccc;
+            padding: 48px 0 24px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand h2 {
+            color: white;
+            margin-bottom: 16px;
+            font-size: 1.5rem;
+        }
+
+        .footer-col h4 {
+            color: white;
+            margin-bottom: 16px;
+            font-size: 1rem;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .install-steps {
+                padding: 24px;
+            }
+
+            .cases-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-wrapper">
+            <a href="#" class="logo">
+                <span>●</span> OBS Studio
+            </a>
+            <nav class="nav-links">
+                <a href="#features">核心功能</a>
+                <a href="#guide">安装指南</a>
+                <a href="#use-cases">应用场景</a>
+                <a href="#faq">常见问题</a>
+            </nav>
+            <a href="https://obsproject.com/download" class="btn-download" target="_blank">下载 OBS</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1>免费开源的直播推流软件</h1>
+                <p>OBS Studio 是一款用于直播推流和屏幕录制的强大软件。无论您是进行游戏直播、录制教学视频还是创建网络研讨会，OBS 都能提供专业级的控制与性能。</p>
+                <div class="hero-buttons">
+                    <a href="https://obsproject.com/download" class="btn-hero" target="_blank">立即下载</a>
+                    <a href="#guide" class="btn-hero secondary">查看教程</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">为什么选择 OBS Studio？</h2>
+                    <p class="section-subtitle">作为全球最受欢迎的直播工具，OBS 拥有强大的功能和灵活的扩展性。</p>
+                </div>
+                <div class="features-grid">
+                    <article class="feature-card">
+                        <div class="feature-icon">✦</div>
+                        <h3>完全免费与开源</h3>
+                        <p>OBS Studio 不收取任何订阅费用，源代码完全公开，允许用户自由修改和分发。</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">⚙️</div>
+                        <h3>高度可定制</h3>
+                        <p>通过丰富的插件库，您可以扩展软件功能，从简单的屏幕录制到复杂的混合多机位直播。</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">💻</div>
+                        <h3>多平台支持</h3>
+                        <p>支持 Windows、macOS 和 Linux 系统，无论您使用何种设备都能流畅运行。</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">🚀</div>
+                        <h3>高性能编码</h3>
+                        <p>支持 NVIDIA NVENC、AMD AMF 和 Intel Quick Sync 硬件编码，确保直播画质清晰且低延迟。</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Installation Guide -->
+        <section id="guide" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">快速开始指南</h2>
+                    <p class="section-subtitle">只需三步即可完成 OBS 的安装并开始创作。</p>
+                </div>
+                <div class="install-container">
+                    <div class="install-steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h3>下载安装程序</h3>
+                                <p>访问 OBS 官方下载页面，根据您的操作系统选择对应的安装包（.exe 或 .dmg）。</p>
+                                <div class="code-block">https://obsproject.com/download</div>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h3>运行安装向导</h3>
+                                <p>双击安装包，按照屏幕提示进行安装。建议勾选“启动 OBS Studio”以直接进入软件。</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h3>添加来源并开始推流</h3>
+                                <p>在“来源”窗口点击“+”号，添加显示器捕获、窗口捕获或视频文件。配置推流服务器地址（如 SRT、RTMP）即可开始直播。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Use Cases -->
+        <section id="use-cases" class="section use-cases">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">广泛的应用场景</h2>
+                    <p class="section-subtitle">OBS 不仅仅用于游戏直播，它能胜任各种专业视频制作任务。</p>
+                </div>
+                <div class="cases-grid">
+                    <div class="case-image">
+                        <!-- Placeholder for visual representation -->
+                        <div style="background: #e0e0e0; height: 300px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #999;">
+                            [ 视觉示意：直播工作台 ]
+                        </div>
+                    </div>
+                    <div class="case-list">
+                        <div class="case-item">
+                            <span class="check-icon">✔</span>
+                            <div>
+                                <h4>游戏直播</h4>
+                                <p>实时录制游戏画面，搭配摄像头进行互动，支持多机位切换。</p>
+                            </div>
+                        </div>
+                        <div class="case-item">
+                            <span class="check-icon">✔</span>
+                            <div>
+                                <h4>屏幕录制与教程</h4>
+                                <p>录制软件操作过程或PPT演示，生成高清晰度的 MP4 视频文件。</p>
+                            </div>
+                        </div>
+                        <div class="case-item">
+                            <span class="check-icon">✔</span>
+                            <div>
+                                <h4>虚拟摄像头</h4>
+                                <p>将 OBS 的画面作为虚拟摄像头输入到 Zoom、Teams 等会议软件中。</p>
+                            </div>
+                        </div>
+                        <div class="case-item">
+                            <span class="check-icon">✔</span>
+                            <div>
+                                <h4>网络研讨会</h4>
+                                <p>支持多路音频输入，适合在线教育、企业培训和远程会议场景。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">常见问题解答</h2>
+                </div>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <h4>OBS 适合新手吗？</h4>
+                        <p>OBS 的界面相对复杂，但内置的“设置向导”可以帮助新手快速配置音频和视频流，逐步熟悉各项功能。</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>如何解决直播卡顿的问题？</h4>
+                        <p>请检查您的网络上传速度，建议将编码器设置为“软件x264”或“NVENC”，并降低码率设置以适应网络环境。</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>录制视频在哪里？</h4>
+                        <p>默认情况下，视频文件会保存在“我的文档\obs-studio\captures”文件夹中。您可以在设置中更改保存路径。</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>如何添加背景音乐？</h4>
+                        <p>在来源栏点击“+”选择“音频混音器”，然后添加“音频输入捕获”或“音频设备输入”来导入本地音乐文件。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h2>OBS Studio</h2>
+                    <p>OBS 是一款免费开源的直播和录制软件。它由社区驱动，旨在帮助任何人创建出色的内容。</p>
+                </div>
+                <div class="footer-col">
+                    <h4>下载</h4>
+                    <ul>
+                        <li><a href="https://obsproject.com/download" target="_blank">Windows 版</a></li>
+                        <li><a href="https://obsproject.com/download" target="_blank">macOS 版</a></li>
+                        <li><a href="https://obsproject.com/download" target="_blank">Linux 版</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>帮助</h4>
+                    <ul>
+                        <li><a href="https://obsproject.com/wiki" target="_blank">官方 Wiki</a></li>
+                        <li><a href="https://obsproject.com/kb" target="_blank">知识库</a></li>
+                        <li><a href="https://obsproject.com/ko-fi" target="_blank">支持开发</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>社区</h4>
+                    <ul>
+                        <li><a href="https://discord.gg/obs" target="_blank">Discord</a></li>
+                        <li><a href="https://github.com/obsproject/obs-studio" target="_blank">GitHub</a></li>
+                        <li><a href="https://forums.obsproject.com/" target="_blank">论坛</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 OBS Project. 本站为非官方帮助文档，内容仅供学习参考。</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

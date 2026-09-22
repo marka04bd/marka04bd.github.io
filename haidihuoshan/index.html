@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>海底火山爆发 - 深海地质活动监测与科普指南</title>
+    <meta name="description" content="海底火山爆发专题页面，提供海底火山爆发成因、监测预警、典型案例及深海生态影响的专业科普与实时动态资讯。">
+    <meta name="keywords" content="海底火山爆发,海底火山,深海地质,洋中脊,火山监测,深海生物">
+    <style>
+        :root {
+            --primary-color: #006994;
+            --secondary-color: #004e6f;
+            --accent-color: #ff6b35;
+            --text-dark: #1a1a1a;
+            --text-gray: #555555;
+            --bg-light: #f4f8fb;
+            --white: #ffffff;
+            --border-radius: 8px;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 12px rgba(0, 105, 148, 0.15);
+            --container-width: 1200px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.2s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Header */
+        header {
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 20px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--text-dark);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            font-weight: 500;
+            color: var(--text-gray);
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary-color);
+        }
+
+        .btn-subscribe {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .btn-subscribe:hover {
+            background-color: var(--secondary-color);
+            color: var(--white);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #001e36 0%, #004e6f 100%);
+            color: var(--white);
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item h3 {
+            font-size: 2rem;
+            color: var(--accent-color);
+        }
+
+        .stat-item p {
+            font-size: 0.9rem;
+            margin: 0;
+            opacity: 0.8;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Section Styling */
+        section {
+            margin-bottom: 60px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 15px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--text-dark);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -17px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary-color);
+        }
+
+        .view-all {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        /* Grid Layouts */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background-color: #ddd;
+        }
+
+        .card-body {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-tag {
+            font-size: 0.75rem;
+            color: var(--primary-color);
+            background: rgba(0, 105, 148, 0.1);
+            padding: 4px 8px;
+            border-radius: 4px;
+            align-self: flex-start;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            margin-bottom: 20px;
+            flex: 1;
+        }
+
+        .card-meta {
+            font-size: 0.8rem;
+            color: #999;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+
+        /* Feature List */
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            align-items: center;
+        }
+
+        .feature-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-content p {
+            color: var(--text-gray);
+            margin-bottom: 20px;
+        }
+
+        .feature-steps {
+            background: var(--white);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .step-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .step-number {
+            background: var(--primary-color);
+            color: var(--white);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        /* Case Study */
+        .case-study {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .case-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            min-height: 400px;
+        }
+
+        .case-info {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .case-info h3 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+        }
+
+        .case-info p {
+            color: var(--text-gray);
+            margin-bottom: 20px;
+        }
+
+        .case-stats {
+            display: flex;
+            gap: 30px;
+        }
+
+        .c-stat strong {
+            display: block;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .c-stat span {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+        }
+
+        /* FAQ */
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 20px;
+        }
+
+        .faq-item {
+            background: var(--white);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .faq-item h4 {
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .faq-item p {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #111;
+            color: #ccc;
+            padding: 60px 20px 20px;
+        }
+
+        .footer-grid {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            color: var(--white);
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--white);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .grid-3, .grid-4 {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-list {
+                grid-template-columns: 1fr;
+            }
+
+            .case-study {
+                grid-template-columns: 1fr;
+            }
+
+            .case-img {
+                min-height: 250px;
+            }
+
+            .nav-links {
+                display: none; /* Simplified for mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-container">
+        <a href="#" class="logo">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+            </svg>
+            海洋<span>视界</span>
+        </a>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#overview" class="active">概览</a></li>
+                <li><a href="#mechanism">爆发机制</a></li>
+                <li><a href="#cases">典型案例</a></li>
+                <li><a href="#monitoring">监测预警</a></li>
+                <li><a href="#faq">常见问题</a></li>
+            </ul>
+        </nav>
+        <a href="#" class="btn-subscribe">订阅更新</a>
+    </div>
+</header>
+
+<main>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>海底火山爆发</h1>
+        <p>探索深海地壳运动奥秘，了解海底火山爆发的形成原因、对全球气候的影响以及人类如何监测这些深海的“雷霆之怒”。</p>
+        <div class="hero-stats">
+            <div class="stat-item">
+                <h3>~1,500+</h3>
+                <p>已知海底火山数量</p>
+            </div>
+            <div class="stat-item">
+                <h3>80%</h3>
+                <p>全球岩浆活动在海底</p>
+            </div>
+            <div class="stat-item">
+                <h3>80,000+</h3>
+                <p>平方公里洋中脊系统</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section class="container" id="overview">
+        <div class="section-header">
+            <h2 class="section-title">什么是海底火山爆发？</h2>
+            <a href="#" class="view-all">查看更多科普文章 &rarr;</a>
+        </div>
+        <div class="grid-3">
+            <article class="card">
+                <img src="https://picsum.photos/seed/ocean1/400/250" alt="海底火山喷发示意图" class="card-img">
+                <div class="card-body">
+                    <span class="card-tag">地质成因</span>
+                    <h3 class="card-title">板块运动与地壳张裂</h3>
+                    <p class="card-desc">海底火山主要分布在洋中脊和海沟附近，是板块构造运动的直接产物。地壳板块分离导致岩浆上涌。</p>
+                    <div class="card-meta">
+                        <span>阅读时间: 3分钟</span>
+                    </div>
+                </div>
+            </article>
+            <article class="card">
+                <img src="https://picsum.photos/seed/ocean2/400/250" alt="热液喷口生物" class="card-img">
+                <div class="card-body">
+                    <span class="card-tag">生态影响</span>
+                    <h3 class="card-title">深海热液生态系统</h3>
+                    <p class="card-desc">爆发喷出的矿物质滋养了独特的生物群落，包括管状蠕虫、巨型蛤和耐热细菌，形成独特的食物链。</p>
+                    <div class="card-meta">
+                        <span>阅读时间: 4分钟</span>
+                    </div>
+                </div>
+            </article>
+            <article class="card">
+                <img src="https://picsum.photos/seed/ocean3/400/250" alt="海啸模拟" class="card-img">
+                <div class="card-body">
+                    <span class="card-tag">次生灾害</span>
+                    <h3 class="card-title">海啸与气溶胶</h3>
+                    <p class="card-desc">大规模海底滑坡引发的火山爆发可能产生毁灭性海啸，同时向大气层释放大量二氧化硫，影响气候。</p>
+                    <div class="card-meta">
+                        <span>阅读时间: 5分钟</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Mechanism Section -->
+    <section class="container" id="mechanism">
+        <div class="feature-list">
+            <div class="feature-content">
+                <h3>海底火山爆发的物理过程</h3>
+                <p>与陆上火山不同，海底火山爆发往往伴随着巨大的水压。当岩浆柱突破海床并进入海水时，会产生剧烈的物理化学反应。海水瞬间被加热至数百摄氏度，形成巨大的气泡，导致爆发性喷发。</p>
+                <p>这种爆发不仅会改变海底地形，还会形成新的岛屿（如夏威夷群岛的形成模式），或者破坏现有的海底光缆和油气管道。</p>
+                <a href="#" class="btn-subscribe" style="display:inline-block; text-align:center;">深入了解地质构造</a>
+            </div>
+            <div class="feature-steps">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div>
+                        <h4>岩浆上升</h4>
+                        <p>地幔对流将高温岩浆沿洋中脊裂谷向上推挤。</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div>
+                        <h4>岩浆房聚集</h4>
+                        <p>岩浆在海底地壳薄弱处聚集形成岩浆房，压力逐渐增大。</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div>
+                        <h4>突破海床</h4>
+                        <p>压力超过海床抗压强度，岩浆喷出形成熔岩穹顶。</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div>
+                        <h4>冷水淬灭</h4>
+                        <p>海水与炽热岩浆接触，产生蒸汽爆炸和黑烟囱现象。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cases Section -->
+    <section class="container" id="cases">
+        <div class="section-header">
+            <h2 class="section-title">重大历史案例</h2>
+        </div>
+        <div class="case-study">
+            <img src="https://picsum.photos/seed/volcano1/600/400" alt="冰岛火山爆发" class="case-img">
+            <div class="case-info">
+                <span class="card-tag">历史记录</span>
+                <h3>2010年冰岛海底火山爆发</h3>
+                <p>此次爆发导致了欧洲航空业长达数月的混乱。虽然火山位于冰川覆盖的岛屿上，但其喷发产生的火山灰柱直冲平流层，对全球航空运输造成了前所未有的影响。</p>
+                <div class="case-stats">
+                    <div class="c-stat">
+                        <strong>0.3km³</strong>
+                        <span>岩浆体积</span>
+                    </div>
+                    <div class="c-stat">
+                        <strong>8,000+</strong>
+                        <span>航班取消</span>
+                    </div>
+                    <div class="c-stat">
+                        <strong>6个月</strong>
+                        <span>持续影响</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Monitoring Section -->
+    <section class="container" id="monitoring">
+        <div class="section-header">
+            <h2 class="section-title">现代监测技术</h2>
+        </div>
+        <div class="grid-4">
+            <div class="card" style="text-align: center; padding: 30px;">
+                <div style="font-size: 2rem; color: var(--accent-color); margin-bottom: 15px;">📡</div>
+                <h4>海底地震仪</h4>
+                <p style="font-size: 0.85rem; margin-top: 10px; color: var(--text-gray);">通过监测微小地震波，科学家可以推断岩浆房的位置和膨胀情况。</p>
+            </div>
+            <div class="card" style="text-align: center; padding: 30px;">
+                <div style="font-size: 2rem; color: var(--accent-color); margin-bottom: 15px;">🌊</div>
+                <h4>海底地形测量</h4>
+                <p style="font-size: 0.85rem; margin-top: 10px; color: var(--text-gray);">利用多波束测深系统，实时监测海底地形的微小隆起和沉降。</p>
+            </div>
+            <div class="card" style="text-align: center; padding: 30px;">
+                <div style="font-size: 2rem; color: var(--accent-color); margin-bottom: 15px;">🌡️</div>
+                <h4>热流测量</h4>
+                <p style="font-size: 0.85rem; margin-top: 10px; color: var(--text-gray);">探测海底地热流量的异常升高，预示着热物质正在接近海底表面。</p>
+            </div>
+            <div class="card" style="text-align: center; padding: 30px;">
+                <div style="font-size: 2rem; color: var(--accent-color); margin-bottom: 15px;">🛰️</div>
+                <h4>卫星遥感</h4>
+                <p style="font-size: 0.85rem; margin-top: 10px; color: var(--text-gray);">利用卫星监测海面温度异常和海水颜色变化，间接评估海底活动。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="container" id="faq">
+        <div class="section-header">
+            <h2 class="section-title">常见问题解答</h2>
+        </div>
+        <div class="faq-grid">
+            <div class="faq-item">
+                <h4>海底火山爆发会产生海啸吗？</h4>
+                <p>是的。如果海底火山爆发伴随着大规模的滑坡或喷发柱坍塌，海水被剧烈扰动，可能引发区域性甚至全球性的海啸。例如，2018年夏威夷基拉韦厄火山爆发曾引发多次海啸。</p>
+            </div>
+            <div class="faq-item">
+                <h4>海底火山爆发会改变海平面吗？</h4>
+                <p>短期内影响极小。虽然火山喷发会形成新的岛屿，但其体积相对于全球海洋体积微乎其微，不会对全球海平面产生显著影响。然而，大量火山灰进入大气层可能通过反射阳光导致短期降温。</p>
+            </div>
+            <div class="faq-item">
+                <h4>人类能在海底火山附近生存吗？</h4>
+                <p>普通人在海底火山爆发附近是极度危险的。火山灰、有毒气体以及可能的海啸都是致命的威胁。只有经过专业训练的海洋地质学家和潜水员在严密防护下才能靠近。</p>
+            </div>
+            <div class="faq-item">
+                <h4>海底火山会喷出岩浆吗？</h4>
+                <p>会。海底火山喷出的岩浆通常富含镁和铁（玄武岩），比陆上火山常见的安山岩或流纹岩密度更大。由于海水的高压，岩浆在喷出前可能不会剧烈汽化，而是形成独特的枕状熔岩。</p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="footer-grid">
+        <div class="footer-col">
+            <h4>关于海洋视界</h4>
+            <p style="font-size: 0.9rem; color: #999;">致力于普及海洋地质知识，提供最权威的海底火山监测数据与科普资讯。</p>
+        </div>
+        <div class="footer-col">
+            <h4>快速导航</h4>
+            <ul>
+                <li><a href="#overview">爆发成因</a></li>
+                <li><a href="#cases">历史案例</a></li>
+                <li><a href="#monitoring">监测技术</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>相关资源</h4>
+            <ul>
+                <li><a href="#">国际海洋地质联合会</a></li>
+                <li><a href="#">全球火山计划 (GVP)</a></li>
+                <li><a href="#">深海探测数据报告</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>联系方式</h4>
+            <ul>
+                <li>contact@oceandiscovery.org</li>
+                <li>+86 10 1234 5678</li>
+                <li>北京市朝阳区海洋科技园</li>
+            </ul>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>&copy; 2023 海洋视界科普平台 版权所有</p>
+    </div>
+</footer>
+
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</body>
+</html>
